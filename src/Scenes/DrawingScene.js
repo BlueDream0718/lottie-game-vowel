@@ -11,7 +11,7 @@ import { returnSoundPath } from "../utils/loadSound";
 import {
     highlightPreList, basePreList, showingLayoutList, maskInfoList,
     animtionList, letterPosList, outLinePreList, lineLengthList,
-    HeavyLengthList, firstPosList, movePath, brushColorList, notJudgeBackList
+    HeavyLengthList, firstPosList, movePath, brushColorList, notJudgeBackList, sparkPosLeft
 } from "../components/CommonVariants"
 
 import { setRepeatAudio, startRepeatAudio, stopRepeatAudio, isRepeating } from "../components/CommonFunctions";
@@ -54,7 +54,7 @@ var timerList = []
 var rememberX = 0;
 var rememberIsLeft = false;
 
-
+var geometryInfo
 export default function Scene({ nextFunc, _geo,
     currentSceneNumber, startTransition, audioList
 }) {
@@ -69,6 +69,9 @@ export default function Scene({ nextFunc, _geo,
     const animationRef = useRef();
     const playerRef = useRef();
     const markParentRef = useRef();
+
+    const sparkBaseRef = useRef();
+    const sparkRefList = [useRef(), useRef(), useRef()]
 
     const markRefList = [useRef(), useRef(), useRef()]
     const reviewImgList = [useRef(), useRef(), useRef()]
@@ -126,12 +129,13 @@ export default function Scene({ nextFunc, _geo,
 
     let currentPath = movePath[letterNum][stepCount]
 
+    geometryInfo = _geo
 
     useEffect(() => {
 
         drawingPanel.current.className = 'hideObject'
-        markParentRef.current.className = 'hideObject'
-        // animationRef.current.className = 'hideObject'
+        // markParentRef.current.className = 'hideObject'
+        animationRef.current.className = 'hideObject'
 
         //1-explain
         //2-clap
@@ -149,7 +153,7 @@ export default function Scene({ nextFunc, _geo,
         setTimeout(() => {
             audioList.bodyAudio1.play().catch(error => { });
             setTimeout(() => {
-                playerRef.current.play();
+                // playerRef.current.play();
                 audioList.bodyAudio1.src = returnSoundPath('SB_04_Audio_' + explainVoices[1])
             }, audioList.bodyAudio1.duration * 1000 + 300);
         }, 2000);
@@ -161,6 +165,11 @@ export default function Scene({ nextFunc, _geo,
 
         ///////
         // showingDrawingPanel();
+
+        setTimeout(() => {
+            reviewFunc();
+        }, 1000);
+
 
 
         return () => {
@@ -236,9 +245,15 @@ export default function Scene({ nextFunc, _geo,
                         setTimeout(() => {
                             markBase.current.style.transition = '1s'
                             markBase.current.style.transform = 'translate(' +
-                                (_geo.width * (-0.115 - 0.225 * (2 - value) + param) - _geo.left) + 'px,' +
-                                (_geo.height * (0.35) + _geo.top)
+                                (geometryInfo.width * (-0.115 - 0.225 * (2 - value) + param) - geometryInfo.left) + 'px,' +
+                                (geometryInfo.height * (0.35) + geometryInfo.top)
                                 + 'px) rotateZ(-360deg) scale(2)'
+                            
+                            console.log('geometryInfo',geometryInfo)
+
+                            sparkBaseRef.current.style.left =
+                                (geometryInfo.left + geometryInfo.width * (0.15 + sparkPosLeft[letterNum][value])) + 'px'
+                            
                             setTimeout(() => {
                                 wordVoiceList[value].play()
                                 if (value == 2 && letterNum != 6) {
@@ -257,13 +272,27 @@ export default function Scene({ nextFunc, _geo,
                             setTimeout(() => {
                                 markBase.current.className = 'disapear'
                                 reviewImgList[value].current.className = 'appear'
+                                let showIndex = 0;
+                                audioList.audioSuccess.currentTime = 0;
+                                audioList.audioSuccess.play();
+                                sparkRefList[showIndex].current.setClass('showObject')
+                                let showInterval = setInterval(() => {
+                                    sparkRefList[showIndex].current.setClass('hideObject')
+                                    if (showIndex < 2) {
+                                        showIndex++
+                                        sparkRefList[showIndex].current.setClass('showObject')
+                                    }
+                                    else {
+                                        clearInterval(showInterval)
+                                    }
+                                }, 200);
 
                                 setTimeout(() => {
                                     reviewImgList[value].current.style.transform = 'scale(1)'
 
                                     setTimeout(() => {
-                                        showingHighImgList[value].current.setClass('disappear')
-                                        showingOriginImgList[value].current.setClass('appear')
+                                        // showingHighImgList[value].current.setClass('disappear')
+                                        // showingOriginImgList[value].current.setClass('appear')
                                     }, 400);
 
                                 }, 4000);
@@ -287,8 +316,8 @@ export default function Scene({ nextFunc, _geo,
             reviewImgList.map((value, index) => {
                 if (value.current != null)
                     setTimeout(() => {
-                        showingOriginImgList[index].current.setClass('disappear')
-                        showingHighImgList[index].current.setClass('appear')
+                        // showingOriginImgList[index].current.setClass('appear')
+                        // showingHighImgList[index].current.setClass('appear')
 
                         value.current.style.transition = '1.2s'
                         setTimeout(() => {
@@ -298,8 +327,8 @@ export default function Scene({ nextFunc, _geo,
                                 value.current.style.transform = 'scale(1)'
 
                                 setTimeout(() => {
-                                    showingOriginImgList[index].current.setClass('appear')
-                                    showingHighImgList[index].current.setClass('disappear')
+                                    // showingOriginImgList[index].current.setClass('appear')
+                                    // showingHighImgList[index].current.setClass('disappear')
                                     if (index == 2 && letterNum != 6) {
                                         setTimeout(() => {
                                             parentObject.current.style.transition = '0.5s'
@@ -1018,7 +1047,7 @@ export default function Scene({ nextFunc, _geo,
                 }}>
                 <BaseImage
                     scale={showingLayoutList[letterNum][currentImgNumOriginal].s}
-                    posInfo={{ b: 0.95, r: showingLayoutList[letterNum][currentImgNumOriginal].r }}
+                    posInfo={{ b: 1, r: showingLayoutList[letterNum][currentImgNumOriginal].r }}
                     url={"SB_04_BG_PI/" + showingLayoutList[letterNum][currentImgNumOriginal].wPath + ".svg"}
                 />
                 <BaseImage
@@ -1068,19 +1097,19 @@ export default function Scene({ nextFunc, _geo,
                                 transform: 'scale(1)',
                             }}>
                             <BaseImage
-                                className='hideObject'
+                                // className='hideObject'
                                 ref={showingOriginImgList[value]}
                                 scale={showingLayoutList[letterNum][value].s}
-                                posInfo={{ b: 0.95, r: showingLayoutList[letterNum][value].r }}
+                                posInfo={{ b: 1.1, r: showingLayoutList[letterNum][value].r }}
                                 url={"SB_04_BG_PI/" + showingLayoutList[letterNum][value].wPath + ".svg"}
                             />
 
-                            <BaseImage
+                            {/* <BaseImage
                                 ref={showingHighImgList[value]}
                                 scale={showingLayoutList[letterNum][value].s}
-                                posInfo={{ b: 0.95, r: showingLayoutList[letterNum][value].r }}
+                                posInfo={{ b: 1.1, r: showingLayoutList[letterNum][value].r }}
                                 url={"SB_04_BG_PI/" + showingLayoutList[letterNum][value].hPath + ".svg"}
-                            />
+                            /> */}
                             <BaseImage
                                 posInfo={{ r: 0.02, b: ((letterNum == 2 && value == 2) ? 0.2 : 0.3) }}
                                 url={"SB_04_Text_interactive_01/" + showingLayoutList[letterNum][value].tPath + ".svg"}
@@ -1100,25 +1129,51 @@ export default function Scene({ nextFunc, _geo,
                         }}>
                         <BaseImage
                             ref={showingOriginImgList[0]}
-                            className='hideObject'
+                            // className='hideObject'
                             scale={showingLayoutList[letterNum][0].s}
-                            posInfo={{ b: 0.95, r: showingLayoutList[letterNum][0].r }}
+                            posInfo={{ b: 1.1, r: showingLayoutList[letterNum][0].r }}
                             url={"SB_04_BG_PI/" + showingLayoutList[letterNum][0].wPath + ".svg"}
                         />
 
-                        <BaseImage
+                        {/* <BaseImage
                             ref={showingHighImgList[0]}
 
                             scale={showingLayoutList[letterNum][0].s}
-                            posInfo={{ b: 0.95, r: showingLayoutList[letterNum][0].r }}
+                            posInfo={{ b: 1.1, r: showingLayoutList[letterNum][0].r }}
                             url={"SB_04_BG_PI/" + showingLayoutList[letterNum][0].hPath + ".svg"}
-                        />
+                        /> */}
                         <BaseImage
                             posInfo={{ r: 0.02, b: 0.3 }}
                             url={"SB_04_Text_interactive_01/" + showingLayoutList[letterNum][0].tPath + ".svg"}
                         />
                     </div>
             }
+
+            {
+                <div
+                    ref={sparkBaseRef}
+                    style={{
+                        position: 'fixed', width: _geo.width * 0.15 + 'px',
+                        height: _geo.height * 0.15 + 'px',
+                        left: _geo.left + _geo.width * (0.1) + 'px',
+                        bottom: _geo.top + _geo.height * 0.2 + 'px',
+                        pointerEvents: 'none',
+                    }}>
+                    {[0, 1, 2].map(value =>
+                        <BaseImage
+                            ref={sparkRefList[value]}
+                            className='hideObject'
+                            posInfo={{
+                                b: 1,
+                                l: 0.0
+                            }}
+                            style={{ transform: 'scale(' + [0.3, 1.7, 2.4][value] + ')' }}
+                            url={"Magic/sb_52_magic_wand_sparkels_" + (value + 1) + ".svg"}
+                        />
+                    )}
+                </div>
+            }
+
             <div ref={markParentRef}>
                 {
                     letterNum != 6 ?

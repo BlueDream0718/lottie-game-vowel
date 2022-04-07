@@ -16,7 +16,7 @@ let backAudio = loadSound('bMusic', true)
 backAudio.loop = true;
 backAudio.volume = 0.2;
 
-const currentSceneNumber = 8;
+const currentSceneNumber = 0;
 
 let primaryAudio = loadSound('SB_04_Audio_01')
 let titleAudio = loadSound('SB_04_Audio_02')
@@ -142,7 +142,6 @@ export default function BaseShot() {
         if (!isGameStarted)
             initialAudio(audioList)
         isGameStarted = true;
-        playBackSound();
     }
 
     function showIntroTitle() {

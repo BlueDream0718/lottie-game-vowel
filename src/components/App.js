@@ -6,6 +6,7 @@ import IntroScene from "../Scenes/IntroScene";
 import ScaleScene from "../Scenes/ScaleScene";
 import DrawingScene from "../Scenes/DrawingScene";
 import ExcellentScene from "../Scenes/ExcellentScene";
+import { MusicButton } from "../components/CommonButtons"
 
 import "../stylesheets/styles.css";
 import "../stylesheets/button.css";
@@ -87,6 +88,9 @@ const App = ({ geo, _setBackground, __controlBacksound, _startTransition,
   React.useImperativeHandle(ref, () => ({
     nextFunc: () => {
       setFomart(1);
+      setTimeout(() => {
+        musicRef.current.fomartSound()
+      }, 500);
       _hideIntroTitle()
 
     },
@@ -101,7 +105,7 @@ const App = ({ geo, _setBackground, __controlBacksound, _startTransition,
 
   function goHome() {
     backgroundImageIndex = 0;
-    musicRef.current.className = 'hideObject'
+    musicRef.current.setClass('hideObject')
 
     _audioList.backAudio.pause();
     _audioList.backAudio.currentTime = 0;
@@ -138,25 +142,8 @@ const App = ({ geo, _setBackground, __controlBacksound, _startTransition,
 
         </Switch>
       </div>
+      <MusicButton ref={musicRef} _geo={__geo} backAudio={_audioList.backAudio} />
 
-      <div
-        ref={musicRef}
-        className='hideObject'
-        style={{
-          position: "fixed", width: '5%',
-          left: '2%',
-          top: "47.5%",
-          cursor: 'pointer',
-        }}
-        onClick={controlBacksound}
-      >
-        <img
-
-          width={"100%"}
-          draggable={false}
-          src={prePathUrl() + "images/Buttons/" + (!_isBackSoundPlaying ? "Audio_mute" : "Audio_unmute") + ".svg"}
-        />
-      </div>
     </div >
   );
 }
