@@ -134,8 +134,8 @@ export default function Scene({ nextFunc, _geo,
     useEffect(() => {
 
         drawingPanel.current.className = 'hideObject'
-        // markParentRef.current.className = 'hideObject'
-        animationRef.current.className = 'hideObject'
+        markParentRef.current.className = 'hideObject'
+        // animationRef.current.className = 'hideObject'
 
         //1-explain
         //2-clap
@@ -153,7 +153,7 @@ export default function Scene({ nextFunc, _geo,
         setTimeout(() => {
             audioList.bodyAudio1.play().catch(error => { });
             setTimeout(() => {
-                // playerRef.current.play();
+                playerRef.current.play();
                 audioList.bodyAudio1.src = returnSoundPath('SB_04_Audio_' + explainVoices[1])
             }, audioList.bodyAudio1.duration * 1000 + 300);
         }, 2000);
@@ -166,9 +166,7 @@ export default function Scene({ nextFunc, _geo,
         ///////
         // showingDrawingPanel();
 
-        setTimeout(() => {
-            reviewFunc();
-        }, 1000);
+       
 
 
 
