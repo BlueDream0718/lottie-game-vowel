@@ -247,7 +247,6 @@ export default function Scene({ nextFunc, _geo,
                                 (geometryInfo.height * (0.35) + geometryInfo.top)
                                 + 'px) rotateZ(-360deg) scale(2)'
                             
-                            console.log('geometryInfo',geometryInfo)
 
                             sparkBaseRef.current.style.left =
                                 (geometryInfo.left + geometryInfo.width * (0.15 + sparkPosLeft[letterNum][value])) + 'px'
@@ -319,7 +318,7 @@ export default function Scene({ nextFunc, _geo,
 
                         value.current.style.transition = '1.2s'
                         setTimeout(() => {
-                            wordVoiceList[index].play();
+                            // wordVoiceList[index].play();
                             value.current.style.transform = 'scale(1.15)'
                             setTimeout(() => {
                                 value.current.style.transform = 'scale(1)'
