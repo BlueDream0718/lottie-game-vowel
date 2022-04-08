@@ -16,7 +16,6 @@ export default function Scene({ nextFunc, _baseGeo,
 
         if (audioInfoList[currentSceneNumber].scale != null)
             audioList.bodyAudio2.src = returnSoundPath('SB_04_Audio_' + audioInfoList[currentSceneNumber].scale)
-
         setTimeout(() => {
             parentObject.current.style.transform = 'translate(0%,0%) scale(1)'
             parentObject.current.style.transition = '4s'
@@ -71,7 +70,10 @@ export default function Scene({ nextFunc, _baseGeo,
                     position: "absolute", width: '100%'
                     , height: '100%',
                     left: '0%',
-                    top: '0%'
+                    top: '0%',
+                    transform: (currentSceneNumber == 1 || currentSceneNumber == 4) ?
+                        'scale(1.75) translateY(-20%)'
+                        : ''
                 }} >
                 <img
                     width={'100%'}
@@ -79,12 +81,11 @@ export default function Scene({ nextFunc, _baseGeo,
                         position: 'absolute',
                         left: '0%',
                         bottom: '0%',
-
                     }}
                     src={prePathUrl() + "images/SB_04_BG/" + scaleImageList[currentSceneNumber] + ".svg"}
                 />
             </div>
-        </div>
+        </div >
     );
 }
 
