@@ -71,7 +71,7 @@ export default function Scene({ nextFunc, _baseGeo,
                     , height: '100%',
                     left: '0%',
                     top: '0%',
-                    transform: (currentSceneNumber == 1 || currentSceneNumber == 4) ?
+                    transform: (currentSceneNumber == 1 || currentSceneNumber == 5) ?
                         'scale(1.75) translateY(-20%)'
                         : ''
                 }} >
