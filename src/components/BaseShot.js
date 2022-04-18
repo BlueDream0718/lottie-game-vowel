@@ -16,7 +16,7 @@ let backAudio = loadSound('bMusic', true)
 backAudio.loop = true;
 backAudio.volume = 0.1;
 
-const currentSceneNumber = 10;
+const currentSceneNumber = 11;
 
 let primaryAudio = loadSound('SB_04_Audio_01')
 let titleAudio = loadSound('SB_04_Audio_02')
