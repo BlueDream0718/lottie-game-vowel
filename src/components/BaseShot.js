@@ -8,15 +8,15 @@ import { isMobile } from "react-device-detect";
 import { LoadingCircleBar } from "./CommonButtons";
 import { setLoop, initialAudio, onOffSound } from "./CommonFunctions";
 import { prePathUrl } from "./CommonFunctions";
-import { letterVoiceList, wordVoiceList } from "./CommonVariants"
+import { letterVoiceList, selfLetterVoiceList, wordVoiceList } from "./CommonVariants"
 
 var oldBackgroundImage = 'SB_04_intro_BG_01';
 
 let backAudio = loadSound('bMusic', true)
 backAudio.loop = true;
-backAudio.volume = 0.2;
+backAudio.volume = 0.1;
 
-const currentSceneNumber = 12;
+const currentSceneNumber = 0;
 
 let primaryAudio = loadSound('SB_04_Audio_01')
 let titleAudio = loadSound('SB_04_Audio_02')
@@ -29,6 +29,7 @@ let wordAudio2 = loadSound('SB_04_Audio_' + wordVoiceList[currentSceneNumber][1]
 let wordAudio3 = loadSound('SB_04_Audio_' + wordVoiceList[currentSceneNumber][2])  //word voice
 
 let letterAudio = loadSound('SB_04_Audio_' + letterVoiceList[currentSceneNumber])
+let selfLetterAudio = loadSound('SB_05_Audio_' + selfLetterVoiceList[currentSceneNumber])
 
 let audioYeah = loadSound('yeah', true)
 let audioWoo = loadSound('woo', true)
@@ -50,12 +51,12 @@ audioSuccess.volume = 0.12
 
 let audioList = {
     backAudio, titleAudio,
-     bodyAudio1, bodyAudio2,
+    bodyAudio1, bodyAudio2,
     wordAudio1, wordAudio2, wordAudio3,
     audioYeah, audioWoo, audioSuccess,
     letterAudio, audioBuzz, audioClap,
     audioClick, audioTing, replayAudio,
-    primaryAudio
+    selfLetterAudio, primaryAudio
 }
 var isOff = false;
 
