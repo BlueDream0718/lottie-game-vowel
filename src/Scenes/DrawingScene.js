@@ -1122,7 +1122,7 @@ export default function Scene({ nextFunc, _geo,
                                 url={"SB_04_BG_PI/" + showingLayoutList[letterNum][value].hPath + ".svg"}
                             /> */}
                         <BaseImage
-                            posInfo={{ r: 0.02, b: ((letterNum == 2 && value == 2) ? 0.2 : 0.3) }}
+                            posInfo={{ r: 0.02, b: showingLayoutList[letterNum][value].tb }}
                             url={"SB_04_Text_interactive_01/" + showingLayoutList[letterNum][value].tPath + ".svg"}
                         />
                     </div>

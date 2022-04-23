@@ -179,21 +179,22 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_01_anaar',
             hPath: 'SB_04_BG_PI_01_YH_anaar',
             tPath: 'SB_04_TI_01_anaar',
-            s: 1, r: 0.0, b: 0.1
+            s: 1, r: 0.0, b: 0.1, tb: 0.2
+
         },
 
         {
             wPath: 'SB_04_BG_PI_02_ananas',
             hPath: 'SB_04_BG_PI_02_YH_ananas',
             tPath: 'SB_04_TI_01_ananas',
-            s: 0.8, r: 0.1, b: 0.13
+            s: 0.8, r: 0.1, b: 0.13, tb: 0.19
         },
 
         {
             wPath: 'SB_04_BG_PI_03_akhbaar',
             hPath: 'SB_04_BG_PI_03_YH_akhbaar',
             tPath: 'SB_04_TI_01_akhbaar',
-            s: 1, r: 0.0, b: 0.13
+            s: 1, r: 0.0, b: 0.13, tb: 0.2
         }
     ],
 
@@ -202,21 +203,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_04_aam',
             hPath: 'SB_04_BG_PI_04_YH_aam',
             tPath: 'SB_04_TI_02_aam',
-            s: 0.6, r: 0.25, b: 0.1
+            s: 0.6, r: 0.25, b: 0.1, tb: 0.16
         },
 
         {
             wPath: 'SB_04_BG_PI_05_ aalu',
             hPath: 'SB_04_BG_PI_05_YH_aalu',
             tPath: 'SB_04_TI_02_aalu',
-            s: 1, r: 0.0, b: 0.1
+            s: 1, r: 0.0, b: 0.1, tb: 0.09
         },
 
         {
             wPath: 'SB_04_BG_PI_06_aasman',
             hPath: 'SB_04_BG_PI_06_YH_aasman',
             tPath: 'SB_04_TI_02_aasman',
-            s: 1, r: 0.0, b: 0.1
+            s: 1, r: 0.0, b: 0.1, tb: 0.15
         }
     ],
 
@@ -225,21 +226,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_07_imli',
             hPath: 'SB_04_BG_PI_07_YH_imli',
             tPath: 'SB_04_TI_03_imli',
-            s: 0.8, r: 0.15, b: 0.1
+            s: 0.8, r: 0.15, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_08_idli',
             hPath: 'SB_04_BG_PI_08_YH_idli',
             tPath: 'SB_04_TI_03_idli',
-            s: 0.9, r: 0.05, b: 0.15
+            s: 0.9, r: 0.05, b: 0.15, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_09_itra',
             hPath: 'SB_04_BG_PI_09_YH_itra',
             tPath: 'SB_04_TI_03_itra',
-            s: 0.7, r: 0.17, b: 0.1
+            s: 0.7, r: 0.17, b: 0.1, tb: 0.115
         }
     ],
 
@@ -249,21 +250,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_10_sugar cane',
             hPath: 'SB_04_BG_PI_10_YH_sugar cane',
             tPath: 'SB_04_TI_04_sugar cane',
-            s: 0.9, r: 0.1, b: 0.1
+            s: 0.9, r: 0.1, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_11_eid',
             hPath: 'SB_04_BG_PI_11_YH_eid',
             tPath: 'SB_04_TI_04_eid',
-            s: 0.9, r: 0.0, b: 0.1
+            s: 0.9, r: 0.0, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_12_eet',
             hPath: 'SB_04_BG_PI_12_YH_eet',
             tPath: 'SB_04_TI_04_eet',
-            s: 1, r: 0.05, b: 0.1
+            s: 1, r: 0.05, b: 0.1, tb: 0.2
         }
     ],
 
@@ -272,21 +273,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_13_ullu',
             hPath: 'SB_04_BG_PI_13_YH_ullu',
             tPath: 'SB_04_TI_05_ullu',
-            s: 0.7, r: 0.18, b: 0.1
+            s: 0.7, r: 0.18, b: 0.1, tb: 0.195
         },
 
         {
             wPath: 'SB_04_BG_PI_14_ upahar',
             hPath: 'SB_04_BG_PI_14_YH_upahar',
             tPath: 'SB_04_TI_05_upahar',
-            s: 1, r: 0.0, b: 0.12
+            s: 1, r: 0.0, b: 0.12, tb: 0.21
         },
 
         {
             wPath: 'SB_04_BG_PI_15_upavan',
             hPath: 'SB_04_BG_PI_15_YH_upavan',
             tPath: 'SB_04_TI_05_upavan',
-            s: 1.4, r: -0.2, b: 0.1
+            s: 1.4, r: -0.2, b: 0.1, tb: 0.265
         }
     ],
 
@@ -296,21 +297,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_16_unn',
             hPath: 'SB_04_BG_PI_16_YH_unn',
             tPath: 'SB_04_TI_06_unn',
-            s: 1, r: 0.05, b: 0.1
+            s: 1, r: 0.05, b: 0.1, tb: 0.115
         },
 
         {
             wPath: 'SB_04_BG_PI_17_udbilav',
             hPath: 'SB_04_BG_PI_17_YH_udbilav',
             tPath: 'SB_04_TI_06_udbilav',
-            s: 1.1, r: -0.05, b: 0.1
+            s: 1.1, r: -0.05, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_18_unt',
             hPath: 'SB_04_BG_PI_18_YH_unt',
             tPath: 'SB_04_TI_06_unt',
-            s: 0.8, r: 0.2, b: 0.15
+            s: 0.8, r: 0.2, b: 0.15, tb: 0.22
         }
     ],
     [
@@ -318,19 +319,19 @@ const showingLayoutList = [
             wPath: 'SB_05_BG_PI_19a_rutu',
             hPath: 'SB_05_BG_PI_19a_YH_rutu',
             tPath: 'SB_05_TI_07_rutu',
-            s: 0.9, r: 0.05, b: 0.1
+            s: 0.9, r: 0.05, b: 0.1, tb: 0.12
         },
         {
             wPath: 'SB_05_BG_PI_19_rushi',
             hPath: 'SB_05_BG_PI_19_YH_rushi',
             tPath: 'SB_05_TI_07_rushi',
-            s: 0.9, r: 0.1, b: 0.12
+            s: 0.9, r: 0.1, b: 0.12, tb: 0.21
         },
         {
             wPath: 'SB_05_BG_PI_19b_runa',
             hPath: 'SB_05_BG_PI_19b_YH_runa',
             tPath: 'SB_05_TI_07_runa',
-            s: 0.9, r: 0.05, b: 0.1
+            s: 0.9, r: 0.05, b: 0.1, tb: 0.12
         }
     ],
     [
@@ -338,21 +339,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_20_ek',
             hPath: 'SB_04_BG_PI_20_YH_ek',
             tPath: 'SB_04_TI_08_ek',
-            s: 0.35, r: 0.4, b : 0.1
+            s: 0.35, r: 0.4, b: 0.1, tb: 0.11
         },
 
         {
             wPath: 'SB_04_BG_PI_21_ektara',
             hPath: 'SB_04_BG_PI_21_YH_ektara',
             tPath: 'SB_04_TI_08_ektara',
-            s: 1, r: 0, b : 0.1
+            s: 1, r: 0, b: 0.1, tb: 0.11
         },
 
         {
             wPath: 'SB_04_BG_PI_22_aedi',
             hPath: 'SB_04_BG_PI_22_YH_aedi',
             tPath: 'SB_04_TI_08_aedi',
-            s: 0.6, r: 0.2, b : 0.1
+            s: 0.6, r: 0.2, b: 0.1, tb: 0.2
         }
     ],
 
@@ -362,21 +363,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_23_enak',
             hPath: 'SB_04_BG_PI_23_YH_enak',
             tPath: 'SB_04_TI_09_enak',
-            s: 1, r: 0.0, b: 0.1
+            s: 1, r: 0.0, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_24_elaan',
             hPath: 'SB_04_BG_PI_24_YH_elaan',
             tPath: 'SB_04_TI_09_elaan',
-            s: 0.75, r: 0.1, b: 0.1
+            s: 0.75, r: 0.1, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_25_airavat',
             hPath: 'SB_04_BG_PI_25_YH_airavat',
             tPath: 'SB_04_TI_09_airavat',
-            s: 1.2, r: 0, b: 0.1
+            s: 1.2, r: 0, b: 0.1, tb: 0.2
         }
     ],
 
@@ -385,21 +386,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_26_okhali',
             hPath: 'SB_04_BG_PI_26_YH_okhali',
             tPath: 'SB_04_TI_10_okhali',
-            s: 1, r: 0.0, b : 0.13
+            s: 1, r: 0.0, b: 0.13, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_27_oos',
             hPath: 'SB_04_BG_PI_27_YH_oos',
             tPath: 'SB_04_TI_10_oos',
-            s: 0.9, r: 0.05, b : 0.13
+            s: 0.9, r: 0.05, b: 0.13, tb: 0.19
         },
 
         {
             wPath: 'SB_04_BG_PI_28_odhani',
             hPath: 'SB_04_BG_PI_28_YH_odhani',
             tPath: 'SB_04_TI_10_odhani',
-            s: 0.5, r: 0.25, b : 0.15
+            s: 0.5, r: 0.25, b: 0.15, tb: 0.15
         }
     ],
 
@@ -409,21 +410,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_29_aura',
             hPath: 'SB_04_BG_PI_29_YH_aura',
             tPath: 'SB_04_TI_11_aurat',
-            s: 1, r: 0.0, b : 0.12
+            s: 1, r: 0.0, b: 0.12, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_30_auzaar',
             hPath: 'SB_04_BG_PI_30_YH_auzaar',
             tPath: 'SB_04_TI_11_auzaar',
-            s: 0.9, r: 0.05, b : 0.11
+            s: 0.9, r: 0.05, b: 0.11, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_31_aushadhi',
             hPath: 'SB_04_BG_PI_31_YH_aushadhi',
             tPath: 'SB_04_TI_11_aushadhi',
-            s: 0.6, r: 0.2, b : 0.12
+            s: 0.6, r: 0.2, b: 0.12, tb: 0.2
         }
     ],
 
@@ -434,21 +435,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_32_angoor',
             hPath: 'SB_04_BG_PI_32_YH_angoor',
             tPath: 'SB_04_TI_12_angoor',
-            s: 1, r: 0.0, b : 0.15
+            s: 1, r: 0.0, b: 0.15, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_33_anguthi',
             hPath: 'SB_04_BG_PI_33_YH_anguthi',
             tPath: 'SB_04_TI_12_anguthi',
-            s: 0.8, r: 0.1, b : 0.1
+            s: 0.8, r: 0.1, b: 0.1, tb: 0.208
         },
 
         {
             wPath: 'SB_04_BG_PI_34_anda',
             hPath: 'SB_04_BG_PI_34_YH_anda',
             tPath: 'SB_04_TI_12_anda',
-            s: 0.9, r: 0.05, b : 0.1
+            s: 0.9, r: 0.05, b: 0.1, tb: 0.27
         }
     ],
 
@@ -457,21 +458,21 @@ const showingLayoutList = [
             wPath: 'SB_04_BG_PI_29_aura',
             hPath: 'SB_04_BG_PI_29_YH_aura',
             tPath: 'SB_04_TI_11_aurat',
-            s: 1, r: 0.0, b : 0.1
+            s: 1, r: 0.0, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_30_auzaar',
             hPath: 'SB_04_BG_PI_30_YH_auzaar',
             tPath: 'SB_04_TI_11_auzaar',
-            s: 0.9, r: 0.05, b : 0.1
+            s: 0.9, r: 0.05, b: 0.1, tb: 0.2
         },
 
         {
             wPath: 'SB_04_BG_PI_31_aushadhi',
             hPath: 'SB_04_BG_PI_31_YH_aushadhi',
             tPath: 'SB_04_TI_11_aushadhi',
-            s: 0.6, r: 0.2, b : 0.1
+            s: 0.6, r: 0.2, b: 0.1, tb: 0.2
         }
     ],
 
