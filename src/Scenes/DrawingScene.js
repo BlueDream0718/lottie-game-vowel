@@ -1075,7 +1075,7 @@ export default function Scene({ nextFunc, _geo,
                             showingDrawingPanel();
                     }}
                     keepLastFrame={true}
-                    speed={0.6}
+                    speed={0.8}
 
                     src={prePathUrl() + 'lottieFiles/main/' + animtionList[letterNum].path + '.json'}
                     style={{
