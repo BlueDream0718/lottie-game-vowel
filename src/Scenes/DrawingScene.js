@@ -1098,7 +1098,7 @@ export default function Scene({ nextFunc, _geo,
                     <div
                         key={value}
                         ref={reviewImgList[value]}
-                        // className='hideObject'
+                        className='hideObject'
                         style={{
                             position: 'fixed', width: _geo.width * 0.2 + 'px',
                             height: _geo.height * 0.18 + 'px',
