@@ -55,6 +55,8 @@ var rememberX = 0;
 var rememberIsLeft = false;
 
 var geometryInfo
+
+var gameList = []
 export default function Scene({ nextFunc, _geo,
     currentSceneNumber, startTransition, audioList
 }) {
@@ -165,7 +167,7 @@ export default function Scene({ nextFunc, _geo,
 
         ///////
         // showingDrawingPanel();
-
+        // reviewFunc()
 
 
 
@@ -179,6 +181,12 @@ export default function Scene({ nextFunc, _geo,
             currentImgNumOriginal = 0;
 
             isFirst = true;
+
+            highlightGame.destroy(true)
+            drawingGame.destroy(true)
+
+            highlightGame = null
+            drawingGame = null
 
             curve = null;
             curves = [];
@@ -230,7 +238,7 @@ export default function Scene({ nextFunc, _geo,
         audioList.bodyAudio1.src = returnSoundPath("SB_04_Audio_" + explainVoices[4])
 
         if (letterNum < 12) {
-            let param = letterNum == 6 ? 0.185 : 0
+            let param = 0
 
             startTransition(2)
             setTimeout(() => {
@@ -253,15 +261,11 @@ export default function Scene({ nextFunc, _geo,
 
                             setTimeout(() => {
                                 wordVoiceList[value].play()
-                                if (value == 2 && letterNum != 6) {
+                                if (value == 2) {
                                     setTimeout(() => {
                                         subReviewFunc()
                                     }, wordVoiceList[value].duration * 1000 + 500);
                                 }
-                                if (value == 0 && letterNum == 6)
-                                    setTimeout(() => {
-                                        subReviewFunc()
-                                    }, wordVoiceList[value].duration * 1000 + 500);
                             }, 1500);
 
                             reviewImgList[value].current.style.transform = 'scale(1.15)'
@@ -329,7 +333,7 @@ export default function Scene({ nextFunc, _geo,
                                 setTimeout(() => {
                                     // showingOriginImgList[index].current.setClass('appear')
                                     // showingHighImgList[index].current.setClass('disappear')
-                                    if (index == 2 && letterNum != 6) {
+                                    if (index == 2) {
                                         setTimeout(() => {
                                             parentObject.current.style.transition = '0.5s'
                                             parentObject.current.style.opacity = '0.0'
@@ -339,17 +343,6 @@ export default function Scene({ nextFunc, _geo,
                                         }, 1000);
 
                                     }
-
-                                    if (index == 0 && letterNum == 6) {
-                                        setTimeout(() => {
-                                            parentObject.current.style.transition = '0.5s'
-                                            parentObject.current.style.opacity = '0.0'
-                                            setTimeout(() => {
-                                                nextFunc()
-                                            }, 500);
-                                        }, 1000);
-                                    }
-
 
                                 }, 1000);
                             }, 4000);
@@ -484,7 +477,7 @@ export default function Scene({ nextFunc, _geo,
 
                         setTimeout(() => {
                             isExlaining = false;
-                            if (repeatStep < 2 && letterNum != 6) {
+                            if (repeatStep < 2) {
 
                                 timerList[0] = setTimeout(() => {
                                     isExlaining = true;
@@ -819,7 +812,7 @@ export default function Scene({ nextFunc, _geo,
                                                 audioList.bodyAudio2.src = returnSoundPath("SB_04_Audio_" + clapVoices[repeatStep + 1])
                                                 setTimeout(() => {
                                                     isExlaining = false;
-                                                    if (repeatStep < 2 && letterNum != 6) {
+                                                    if (repeatStep < 2) {
                                                         timerList[0] = setTimeout(() => {
                                                             isExlaining = true;
                                                             audioList.letterAudio.play();
@@ -1082,6 +1075,7 @@ export default function Scene({ nextFunc, _geo,
                             showingDrawingPanel();
                     }}
                     keepLastFrame={true}
+                    speed={0.7}
 
                     src={prePathUrl() + 'lottieFiles/main/' + animtionList[letterNum].path + '.json'}
                     style={{
@@ -1099,71 +1093,40 @@ export default function Scene({ nextFunc, _geo,
 
 
             {
-                letterNum != 6 ?
-                    [0, 1, 2].map(value =>
-                        <div
-                            key={value}
-                            ref={reviewImgList[value]}
-                            className='hideObject'
-                            style={{
-                                position: 'fixed', width: _geo.width * 0.2 + 'px',
-                                height: _geo.height * 0.18 + 'px',
-                                left: _geo.left + _geo.width * (0.1 + 0.3 * value) + 'px',
-                                bottom: _geo.top + _geo.height * 0.2 + 'px',
-                                pointerEvents: 'none',
-                                transform: 'scale(1)',
-                            }}>
-                            <BaseImage
-                                // className='hideObject'
-                                ref={showingOriginImgList[value]}
-                                scale={showingLayoutList[letterNum][value].s}
-                                posInfo={{ b: 1.1, r: showingLayoutList[letterNum][value].r }}
-                                url={"SB_04_BG_PI/" + showingLayoutList[letterNum][value].wPath + ".svg"}
-                            />
 
-                            {/* <BaseImage
-                                ref={showingHighImgList[value]}
-                                scale={showingLayoutList[letterNum][value].s}
-                                posInfo={{ b: 1.1, r: showingLayoutList[letterNum][value].r }}
-                                url={"SB_04_BG_PI/" + showingLayoutList[letterNum][value].hPath + ".svg"}
-                            /> */}
-                            <BaseImage
-                                posInfo={{ r: 0.02, b: ((letterNum == 2 && value == 2) ? 0.2 : 0.3) }}
-                                url={"SB_04_Text_interactive_01/" + showingLayoutList[letterNum][value].tPath + ".svg"}
-                            />
-                        </div>
-                    ) :
+                [0, 1, 2].map(value =>
                     <div
-                        ref={reviewImgList[0]}
-                        className='hideObject'
+                        key={value}
+                        ref={reviewImgList[value]}
+                        // className='hideObject'
                         style={{
                             position: 'fixed', width: _geo.width * 0.2 + 'px',
                             height: _geo.height * 0.18 + 'px',
-                            left: _geo.left + _geo.width * 0.4 + 'px',
+                            left: _geo.left + _geo.width * (0.1 + 0.3 * value) + 'px',
                             bottom: _geo.top + _geo.height * 0.2 + 'px',
                             pointerEvents: 'none',
                             transform: 'scale(1)',
                         }}>
                         <BaseImage
-                            ref={showingOriginImgList[0]}
-                            // className='hideObject'
-                            scale={showingLayoutList[letterNum][0].s}
-                            posInfo={{ b: 1.1, r: showingLayoutList[letterNum][0].r }}
-                            url={"SB_04_BG_PI/" + showingLayoutList[letterNum][0].wPath + ".svg"}
+                            className='hideObject'
+                            ref={showingOriginImgList[value]}
+                            scale={showingLayoutList[letterNum][value].s}
+                            posInfo={{ b: 1.1 + showingLayoutList[letterNum][value].b, r: showingLayoutList[letterNum][value].r }}
+                            url={"SB_04_BG_PI/" + showingLayoutList[letterNum][value].wPath + ".svg"}
                         />
 
                         {/* <BaseImage
-                            ref={showingHighImgList[0]}
-
-                            scale={showingLayoutList[letterNum][0].s}
-                            posInfo={{ b: 1.1, r: showingLayoutList[letterNum][0].r }}
-                            url={"SB_04_BG_PI/" + showingLayoutList[letterNum][0].hPath + ".svg"}
-                        /> */}
+                                ref={showingHighImgList[value]}
+                                scale={showingLayoutList[letterNum][value].s}
+                                posInfo={{ b: 1.1, r: showingLayoutList[letterNum][value].r }}
+                                url={"SB_04_BG_PI/" + showingLayoutList[letterNum][value].hPath + ".svg"}
+                            /> */}
                         <BaseImage
-                            posInfo={{ r: 0.02, b: 0.3 }}
-                            url={"SB_04_Text_interactive_01/" + showingLayoutList[letterNum][0].tPath + ".svg"}
+                            posInfo={{ r: 0.02, b: ((letterNum == 2 && value == 2) ? 0.2 : 0.3) }}
+                            url={"SB_04_Text_interactive_01/" + showingLayoutList[letterNum][value].tPath + ".svg"}
                         />
                     </div>
+                )
             }
 
             {
@@ -1193,40 +1156,24 @@ export default function Scene({ nextFunc, _geo,
 
             <div ref={markParentRef}>
                 {
-                    letterNum != 6 ?
-                        [0, 1, 2].map(value =>
-                            <div
-                                key={value}
-                                ref={markBaseList[2 - value]}
-                                style={{
-                                    position: 'fixed',
-                                    width: _geo.width * 0.06 + 'px',
-                                    height: _geo.width * 0.06 + 'px',
-                                    right: _geo.width * (0.03 + 0.075 * value) + 'px',
-                                    top: 0.05 * _geo.height + 'px',
-                                    pointerEvents: 'none'
-                                }}>
-                                <BaseImage
-                                    ref={markRefList[2 - value]}
-                                    url="SB_04_Progress bar/SB_04_progress bar_04.svg"
-                                />
-                            </div>
-                        ) :
+                    [0, 1, 2].map(value =>
                         <div
-                            ref={markBaseList[0]}
+                            key={value}
+                            ref={markBaseList[2 - value]}
                             style={{
                                 position: 'fixed',
                                 width: _geo.width * 0.06 + 'px',
                                 height: _geo.width * 0.06 + 'px',
-                                right: _geo.width * (0.105) + 'px',
+                                right: _geo.width * (0.03 + 0.075 * value) + 'px',
                                 top: 0.05 * _geo.height + 'px',
                                 pointerEvents: 'none'
                             }}>
                             <BaseImage
-                                ref={markRefList[0]}
+                                ref={markRefList[2 - value]}
                                 url="SB_04_Progress bar/SB_04_progress bar_04.svg"
                             />
                         </div>
+                    )
                 }
             </div>
 

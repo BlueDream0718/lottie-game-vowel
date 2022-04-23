@@ -45,7 +45,7 @@ export default function Scene({ nextFunc, _baseGeo,
                 }, 5000);
 
             }, audioList.bodyAudio1.duration * 1000 + 1000);
-        }, 1500);
+        }, 2500);
 
         return () => {
         }

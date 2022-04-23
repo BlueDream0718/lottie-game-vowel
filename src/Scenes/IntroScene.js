@@ -9,18 +9,18 @@ export default function Scene2({ nextFunc, _geo, audioList, _baseGeo, currentSce
         () => {
             audioList.bodyAudio1.src = returnSoundPath("SB_04_Audio_" + audioPath[currentSceneNumber])
             setTimeout(() => {
-                audioList.primaryAudio.play()
-                setTimeout(() => {
-                    // audioList.titleAudio.play();
+                // audioList.primaryAudio.play()
+                // setTimeout(() => {
+                // audioList.titleAudio.play();
 
-                    // setTimeout(() => {
-                    audioList.bodyAudio1.play();
-                    setTimeout(() => {
-                        nextFunc()
-                    }, audioList.bodyAudio1.duration * 1000 + 1000);
-                    // }, 2500);
-                }, 1500);
-            }, 1500);
+                // setTimeout(() => {
+                audioList.bodyAudio1.play();
+                setTimeout(() => {
+                    nextFunc()
+                }, audioList.bodyAudio1.duration * 1000 + 1000);
+                // }, 2500);
+                // }, 1500);
+            }, 2500);
             return () => {
             }
         }, []
