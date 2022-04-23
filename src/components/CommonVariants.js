@@ -505,7 +505,7 @@ const animtionList = [
     { path: 'SB_04_r_1', scale: 0.445, left: 0.275, top: 0.22 },
     { path: 'SB_04_e_1', scale: 0.305, left: 0.348, top: 0.195 },
     { path: 'SB_04_ai_1', scale: 0.29, left: 0.35, top: 0.142 },
-    { path: 'SB_04_o_1', scale: 0.38, left: 0.35, top: 0.172 },
+    { path: 'SB_04_o_1', scale: 0.38, left: 0.3, top: 0.172 },
     { path: 'SB_04_au_1', scale: 0.36, left: 0.315, top: 0.195 },
     { path: 'SB_04_am_1', scale: 0.36, left: 0.32, top: 0.15 },
     { path: 'SB_04_ahaa_1', scale: 0.43, left: 0.305, top: 0.205 },
