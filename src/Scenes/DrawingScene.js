@@ -1108,7 +1108,7 @@ export default function Scene({ nextFunc, _geo,
                             transform: 'scale(1)',
                         }}>
                         <BaseImage
-                            className='hideObject'
+                            // className='hideObject'
                             ref={showingOriginImgList[value]}
                             scale={showingLayoutList[letterNum][value].s}
                             posInfo={{ b: 1.1 + showingLayoutList[letterNum][value].b, r: showingLayoutList[letterNum][value].r }}
