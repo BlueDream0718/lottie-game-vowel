@@ -6,7 +6,7 @@ const letterVoiceList = [
     '11', '12',
     '13', '14',
     '224', '16',
-    '17', '18',
+    '226', '18',
     '19'
 ]
 
@@ -35,7 +35,7 @@ const wordVoiceList = [
     ['73', '74', '75'],
     ['78', '79', '80'],
     // ['31', '32', '33'],
-    ['42A', '201', '41A'],
+    ['42A', '32', '41A'],
 
     ['31', '32', '33'],
 ]
@@ -129,7 +129,7 @@ const audioInfoList = [
     { origin: '62', scale: null },
     { origin: '67', scale: null },
     { origin: '72', scale: null },
-    { origin: '13A', scale: null }, //mended....
+    { origin: '77', scale: null }, //mended....
     { origin: '29', scale: null },
 ]
 
