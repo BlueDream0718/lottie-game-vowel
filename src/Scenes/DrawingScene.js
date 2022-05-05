@@ -56,7 +56,9 @@ var rememberIsLeft = false;
 
 var geometryInfo
 
-var gameList = []
+let scaleInterval, scaleTimer, repeatInterval
+let isTracingStarted = false;
+
 export default function Scene({ nextFunc, _geo,
     currentSceneNumber, startTransition, audioList
 }) {
@@ -216,13 +218,18 @@ export default function Scene({ nextFunc, _geo,
                 animationRef.current.className = 'hideObject'
             }, 300);
 
+            isTracingStarted = true;
             timerList[7] = setTimeout(() => {
+
                 audioList.letterAudio.play();
                 isExlaining = true;
                 timerList[8] = setTimeout(() => {
                     audioList.bodyAudio1.play();
 
+                    playScaleFunc()
+
                     startRepeatAudio();
+                    startRepeatScaleFunc()
                     isExlaining = false;
 
                 }, 1000);
@@ -274,8 +281,10 @@ export default function Scene({ nextFunc, _geo,
                                 markBase.current.className = 'disapear'
                                 reviewImgList[value].current.className = 'appear'
                                 let showIndex = 0;
+
                                 audioList.audioSuccess.currentTime = 0;
                                 audioList.audioSuccess.play();
+
                                 sparkRefList[showIndex].current.setClass('showObject')
                                 let showInterval = setInterval(() => {
                                     sparkRefList[showIndex].current.setClass('hideObject')
@@ -360,6 +369,48 @@ export default function Scene({ nextFunc, _geo,
         })
     }
 
+    function repeatScaleFunc() {
+        repeatInterval = setInterval(() => {
+            playScaleFunc()
+        }, 10000);
+    }
+
+    function playScaleFunc() {
+        clearInterval(scaleInterval)
+
+        let value = 1
+        let isIncrease = true
+        scaleInterval = setInterval(() => {
+
+            if (isIncrease)
+                value += 0.01
+            else
+                value -= 0.01
+
+            if (value >= 1.1)
+                isIncrease = false;
+            if (value <= 1)
+                isIncrease = true
+
+            movingImage.setScale(value)
+        }, 50);
+    }
+
+    function startRepeatScaleFunc(delay = 5000) {
+        scaleTimer = setTimeout(() => {
+            repeatScaleFunc()
+        }, delay);
+    }
+
+    function stopScaleFunc() {
+        clearTimeout(scaleTimer)
+        clearInterval(scaleInterval)
+        clearInterval(repeatInterval)
+
+        movingImage.setScale(1)
+    }
+
+
     let posList = []
     var path
     function create() {
@@ -387,6 +438,41 @@ export default function Scene({ nextFunc, _geo,
 
         let isMoving = false;
 
+        circleObj.on('pointerover', function () {
+
+            setTimeout(() => {
+                if (isTracingStarted && isRepeating()) {
+                    stopRepeatAudio()
+                    stopScaleFunc()
+                }
+            }, 10);
+
+        });
+
+        circleObj.on('pointerout', function () {
+
+            setTimeout(() => {
+                if (isTracingStarted && !isRepeating()) {
+                    startRepeatAudio()
+                    startRepeatScaleFunc()
+                }
+            }, 10);
+
+
+        });
+
+        circleObj.on('pointerup', function () {
+
+            setTimeout(() => {
+                if (isTracingStarted) {
+                    startRepeatAudio();
+                    startRepeatScaleFunc();
+                }
+            }, 10);
+
+
+        });
+
         circleObj.on('pointerdown', function (pointer) {
             if (isExlaining) {
 
@@ -406,10 +492,12 @@ export default function Scene({ nextFunc, _geo,
                 isExlaining = false;
             }
 
-            if (isRepeating())
+            if (isTracingStarted && isRepeating()) {
+                stopScaleFunc()
                 stopRepeatAudio()
+            }
 
-            if (!isMoving) {
+            if (!isMoving && isTracingStarted) {
                 circleObj.on('pointermove', moveFunc, this);
                 // if (!isFirst) {
                 //     curve = new Phaser.Curves.Spline([pointer.x, pointer.y]);
@@ -424,6 +512,7 @@ export default function Scene({ nextFunc, _geo,
             if (firstPosList[letterNum][stepCount].p != null && firstPosList[letterNum][stepCount].p == true) {
 
                 isMoving = false;
+                isTracingStarted = false;
 
                 nearestStepNum = 0;
                 curve.addPoint(firstPosList[letterNum][stepCount].x, firstPosList[letterNum][stepCount].y);
@@ -483,7 +572,12 @@ export default function Scene({ nextFunc, _geo,
                                     isExlaining = true;
                                     audioList.letterAudio.play();
                                     timerList[1] = setTimeout(() => {
-                                        audioList.bodyAudio1.play();
+
+                                        playScaleFunc()
+
+                                        startRepeatAudio()
+                                        startRepeatScaleFunc()
+
                                         timerList[2] = setTimeout(() => {
                                             isExlaining = false;
                                         }, audioList.bodyAudio1.duration * 1000);
@@ -531,6 +625,9 @@ export default function Scene({ nextFunc, _geo,
 
                                 subCurve = new Phaser.Curves.Spline([currentPath[0].x, currentPath[0].y]);
                                 subCurves = []
+
+                                isTracingStarted = true;
+
                             }
                             else {
                                 reviewFunc();
@@ -552,13 +649,19 @@ export default function Scene({ nextFunc, _geo,
                     stepCount++
                     currentPath = movePath[letterNum][stepCount]
 
-                    circleObj.x = movePath[letterNum][stepCount][0].x;
-                    circleObj.y = movePath[letterNum][stepCount][0].y;
-
-                    movingImage.x = movePath[letterNum][stepCount][0].x;
-                    movingImage.y = movePath[letterNum][stepCount][0].y;
+                    isTracingStarted = false;
+                    if (firstPosList[letterNum][stepCount].letter_start) {
+                        audioList.audioTing.currentTime = 0
+                        audioList.audioTing.play()
+                    }
 
                     setTimeout(() => {
+
+                        circleObj.x = movePath[letterNum][stepCount][0].x;
+                        circleObj.y = movePath[letterNum][stepCount][0].y;
+
+                        movingImage.x = movePath[letterNum][stepCount][0].x;
+                        movingImage.y = movePath[letterNum][stepCount][0].y;
 
                         if (firstPosList[letterNum][stepCount].letter_start) {
                             highlightList[highCurrentNum].visible = false
@@ -577,7 +680,13 @@ export default function Scene({ nextFunc, _geo,
                             }
                         })
                         curve.addPoint(circleObj.x, circleObj.y);
-                    }, 200);
+
+                        isTracingStarted = true;
+
+                        startRepeatAudio()
+                        startRepeatScaleFunc()
+
+                    }, 750);
                 }
             }
         }, this);
@@ -586,7 +695,7 @@ export default function Scene({ nextFunc, _geo,
         circleObj.on('pointermove', moveFunc, this);
 
         function moveFunc(pointer) {
-            if (pointer.isDown && isMoving) {
+            if (pointer.isDown && isMoving && isTracingStarted) {
                 if (isExlaining) {
 
                     clearTimeout(timerList[7])
@@ -756,11 +865,15 @@ export default function Scene({ nextFunc, _geo,
 
                                     if (compDistance < 40 && currentMinDisIndex == currentPath.length - 1) {
                                         isMoving = false;
+                                        isTracingStarted = false;
                                         x = currentPath[currentPath.length - 1].x
                                         y = currentPath[currentPath.length - 1].y
 
                                         nearestStepNum = 0;
                                         curve.addPoint(x, y);
+
+                                        stopScaleFunc()
+                                        stopRepeatAudio()
 
                                         if (stepCount == movePath[letterNum].length - 1) {
 
@@ -818,14 +931,16 @@ export default function Scene({ nextFunc, _geo,
                                                             audioList.letterAudio.play();
                                                             timerList[1] = setTimeout(() => {
                                                                 audioList.bodyAudio1.play();
+                                                                playScaleFunc()
+
                                                                 timerList[2] = setTimeout(() => {
                                                                     isExlaining = false;
                                                                 }, audioList.bodyAudio1.duration * 1000);
                                                             }, 1000);
                                                         }, 1000);
 
-                                                        startRepeatAudio(7000, 9000)
-
+                                                        startRepeatAudio()
+                                                        startRepeatScaleFunc()
 
                                                         currentImgNumOriginal++
                                                         setRendering(currentImgNumOriginal);
@@ -869,6 +984,8 @@ export default function Scene({ nextFunc, _geo,
 
                                                         subCurve = new Phaser.Curves.Spline([currentPath[0].x, currentPath[0].y]);
                                                         subCurves = []
+
+                                                        isTracingStarted = true;
                                                     }
                                                     else {
                                                         reviewFunc();
@@ -902,6 +1019,8 @@ export default function Scene({ nextFunc, _geo,
                                             let timeDuration = 0
                                             if (firstPosList[letterNum][stepCount].letter_start) {
                                                 timeDuration = 750
+                                                audioList.audioTing.currentTime = 0
+                                                audioList.audioTing.play();
                                             }
 
                                             setTimeout(() => {
@@ -940,6 +1059,12 @@ export default function Scene({ nextFunc, _geo,
                                                     })
                                                     parentObject.current.style.pointerEvents = ''
                                                     circleObj.on('pointermove', moveFunc, this);
+
+                                                    isTracingStarted = true;
+
+                                                    startRepeatAudio()
+                                                    startRepeatScaleFunc()
+
                                                 }, 200);
                                             }, timeDuration);
                                         }
